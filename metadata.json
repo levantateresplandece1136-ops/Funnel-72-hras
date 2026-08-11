@@ -1,0 +1,6 @@
+{
+  "name": "Las Primeras 72 Horas - Guía PDF para Padres",
+  "description": "Embudo de captación de leads para descargar la guía de 23 páginas 'Las Primeras 72 Horas: Qué hacer —y qué evitar— cuando descubres que algo anda mal con tu hijo' de Levántate Resplandece.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
