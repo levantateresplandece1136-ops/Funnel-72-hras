@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SqueezePage } from './components/SqueezePage';
 import { GuideReader } from './components/GuideReader';
+import { WhatsAppButton } from './components/WhatsAppButton';
 import { LeadInfo } from './types';
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
       ) : (
         <GuideReader lead={currentLead} onBackToOptin={handleBackToOptin} />
       )}
+      <WhatsAppButton />
     </div>
   );
 }
