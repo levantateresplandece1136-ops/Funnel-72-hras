@@ -24,23 +24,34 @@ export const SqueezePage: React.FC<SqueezePageProps> = ({ onAccessGuide }) => {
   const [phone, setPhone] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name || !email) return;
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  if (!name || !email) return;
 
-    setIsSubmitting(true);
-    setTimeout(() => {
-      const lead: LeadInfo = {
-        name,
-        email,
-        phone,
-        capturedAt: new Date().toISOString()
-      };
-      onAccessGuide(lead);
-      setIsSubmitting(false);
-    }, 600);
-  };
+  setIsSubmitting(true);
+  try {
+    const response = await fetch('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, phone }),
+    });
 
+    if (!response.ok) throw new Error('No se pudo registrar el contacto');
+
+    const lead: LeadInfo = {
+      name,
+      email,
+      phone,
+      capturedAt: new Date().toISOString()
+    };
+    onAccessGuide(lead);
+  } catch (error) {
+    console.error(error);
+    alert('Hubo un problema al registrar tus datos. Por favor intenta de nuevo.');
+  } finally {
+    setIsSubmitting(false);
+  }
+};
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950">
       {/* Background Subtle Ambient Glow */}
